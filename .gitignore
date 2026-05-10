@@ -9,7 +9,6 @@ venv/
 env/
 
 # Django artifacts
-db.sqlite3
 staticfiles/
 *.log
 
