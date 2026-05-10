@@ -866,10 +866,11 @@ a {
     padding: 30px 20px;
     position: fixed;
     left: 0;
-    top: 0;
+    top: 72px;
     width: 250px;
-    height: 100vh;
+    height: calc(100vh - 72px);
     overflow-y: auto;
+    box-shadow: var(--shadow-md);
 }
 
 .sidebar-brand {
@@ -904,6 +905,82 @@ a {
 .admin-content {
     margin-left: 250px;
     padding: 40px;
+}
+
+.admin-content h1,
+.admin-content h2 {
+    margin-bottom: 10px;
+}
+
+.admin-content > p {
+    margin-bottom: 24px;
+}
+
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.admin-card,
+.admin-section {
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 28px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(4px);
+}
+
+.admin-card p,
+.admin-section p {
+    margin-bottom: 18px;
+}
+
+.admin-form {
+    width: 100%;
+}
+
+.admin-form .form-group {
+    margin-bottom: 18px;
+}
+
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
+    width: 100%;
+}
+
+.admin-form .checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-form .checkbox input {
+    width: 18px;
+    height: 18px;
+}
+
+.admin-form .checkbox label {
+    margin-bottom: 0;
+}
+
+.btn-small {
+    font-size: 12px;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.danger-btn {
+    background: var(--danger-color);
+    color: var(--white);
+    border: none;
+}
+
+.danger-btn:hover {
+    background: #dc2626;
 }
 
 .dashboard-header {
@@ -954,9 +1031,36 @@ a {
     overflow: hidden;
 }
 
+.dashboard-table thead {
+    background: #f3f4f6;
+}
+
 .dashboard-table table {
     width: 100%;
     border-collapse: collapse;
+}
+
+table.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.dashboard-table th {
+    background: #f3f4f6;
+    padding: 14px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+table.dashboard-table td {
+    padding: 14px;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+table.dashboard-table tr:hover {
+    background: #f9fafb;
 }
 
 .dashboard-table th {
