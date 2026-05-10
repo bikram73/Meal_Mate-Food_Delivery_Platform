@@ -15,8 +15,8 @@
             <a href="#home">Home</a>
             <a href="#how-it-works">How It Works</a>
             <a href="#restaurants">Restaurants</a>
-            <a href="open_signin" class="primary-btn">Sign In</a>
-            <a href="open_signup" class="primary-btn">Sign Up</a>
+            <a href="{% url 'open_signin' %}" class="primary-btn">Sign In</a>
+            <a href="{% url 'open_signup' %}" class="primary-btn">Sign Up</a>
         </div>
     </nav>
 
@@ -35,8 +35,8 @@
                 <span>Safe payments</span>
             </div>
             <div class="hero-buttons">
-                <a href="open_signup" class="primary-btn">Get Started</a>
-                <a href="open_signin" class="secondary-btn">Sign In</a>
+                <a href="{% url 'open_signup' %}" class="primary-btn">Get Started</a>
+                <a href="{% url 'open_signin' %}" class="secondary-btn">Sign In</a>
             </div>
         </div>
         <div class="hero-image">

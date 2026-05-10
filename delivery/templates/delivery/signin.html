@@ -13,7 +13,7 @@
         <div class="navbar-brand">🍔 Meal Mate</div>
         <div class="nav-links">
             <a href="/">Home</a>
-            <a href="open_signup" class="primary-btn">Sign Up</a>
+            <a href="{% url 'open_signup' %}" class="primary-btn">Sign Up</a>
         </div>
     </nav>
 
@@ -39,7 +39,7 @@
                 <button type="submit" class="primary-btn full-width">Sign In</button>
             </form>
 
-            <p class="auth-footer">Don't have an account? <a href="open_signup">Sign Up</a></p>
+            <p class="auth-footer">Don't have an account? <a href="{% url 'open_signup' %}">Sign Up</a></p>
         </div>
     </div>
 </body>

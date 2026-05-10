@@ -21,8 +21,8 @@
         <aside class="sidebar">
             <h3>Admin Menu</h3>
             <ul class="sidebar-menu">
-                <li><a href="open_show_restaurant">Manage Restaurants</a></li>
-                <li><a href="open_add_restaurant">Add Restaurant</a></li>
+                <li><a href="{% url 'open_show_restaurant' %}">Manage Restaurants</a></li>
+                <li><a href="{% url 'open_add_restaurant' %}">Add Restaurant</a></li>
             </ul>
         </aside>
 
@@ -34,12 +34,12 @@
                 <div class="dashboard-card">
                     <h3>📍 Manage Restaurants</h3>
                     <p>Add, edit, or delete restaurant information</p>
-                    <a href="open_show_restaurant" class="primary-btn">Manage</a>
+                    <a href="{% url 'open_show_restaurant' %}" class="primary-btn">Manage</a>
                 </div>
                 <div class="dashboard-card">
                     <h3>➕ Add New Restaurant</h3>
                     <p>Add a new restaurant to your platform</p>
-                    <a href="open_add_restaurant" class="primary-btn">Add</a>
+                    <a href="{% url 'open_add_restaurant' %}" class="primary-btn">Add</a>
                 </div>
             </div>
         </main>

@@ -11,7 +11,7 @@
     <nav class="navbar">
         <div class="navbar-brand">🍔 Meal Mate Admin</div>
         <div class="nav-links">
-            <a href="open_show_restaurant" class="outline-btn">Back</a>
+            <a href="{% url 'open_show_restaurant' %}" class="outline-btn">Back</a>
             <a href="/" class="outline-btn">Logout</a>
         </div>
     </nav>
@@ -20,8 +20,8 @@
         <aside class="sidebar">
             <h3>Admin Menu</h3>
             <ul class="sidebar-menu">
-                <li><a href="open_show_restaurant" class="active">Manage Restaurants</a></li>
-                <li><a href="open_add_restaurant">Add Restaurant</a></li>
+                <li><a href="{% url 'open_show_restaurant' %}" class="active">Manage Restaurants</a></li>
+                <li><a href="{% url 'open_add_restaurant' %}">Add Restaurant</a></li>
             </ul>
         </aside>
 
