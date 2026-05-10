@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
+import shutil
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,14 +24,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'dev-insecure-secret-key-change-in-production')
 
+def env_bool(name, default=False):
+    value = os.environ.get(name)
+    if value is None:
+        return default
+    return value.strip().lower() in {'1', 'true', 'yes', 'on'}
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() == 'true'
+# Default to False on Vercel unless explicitly overridden.
+DEBUG = env_bool('DJANGO_DEBUG', default=(os.environ.get('VERCEL') != '1'))
 
 ALLOWED_HOSTS = [
     host.strip() for host in os.environ.get(
         'DJANGO_ALLOWED_HOSTS',
         '127.0.0.1,localhost'
-    ).split(',')
+    ).split(',') if host.strip()
 ]
 
 # Always allow Vercel domains
@@ -92,10 +101,19 @@ WSGI_APPLICATION = 'meal_buddy.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+if os.environ.get('VERCEL') == '1':
+    # /var/task is read-only on Vercel; use /tmp for writable SQLite runtime DB.
+    sqlite_path = Path('/tmp/db.sqlite3')
+    seed_db = BASE_DIR / 'db.sqlite3'
+    if not sqlite_path.exists() and seed_db.exists():
+        shutil.copyfile(seed_db, sqlite_path)
+else:
+    sqlite_path = BASE_DIR / 'db.sqlite3'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': sqlite_path,
     }
 }
 
