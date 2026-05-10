@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Order Summary - Meal Mate</title>
+</head>
+<body>
+    <h1>Thank you for your order, {{ username }}!</h1>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-brand">🍔 Meal Mate</div>
+        <div class="nav-links">
+            <span>Thank you, {{username}}!</span>
+            <a href="/" class="outline-btn">Logout</a>
+        </div>
+    </nav>
+
+    <!-- ORDER SUMMARY -->
+    <main class="container">
+        <div class="order-summary">
+            <div class="order-success">
+                <div class="order-icon">✓</div>
+                <h1>Order Confirmed!</h1>
+                <p>Thank you for your order, {{ username }}!</p>
+            </div>
+
+            <div class="order-details">
+                <h2>Delivery Address</h2>
+                <div class="address-box">
+                    <p>{{ customer.address }}</p>
+                </div>
+
+                <p class="delivery-message">Your order will be delivered to this location shortly. Thank you for choosing Meal Mate!</p>
+
+                <div class="order-actions">
+                    {% if cart_items %}
+                        <a href="{% url 'customer_menu' cart_items.0.restaurant.id username %}" class="primary-btn">Order Again</a>
+                    {% else %}
+                        <a href="{% url 'customer_home' username %}" class="primary-btn">Back to Restaurants</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Meal Mate. All rights reserved.</p>
+    </footer>
+</html>

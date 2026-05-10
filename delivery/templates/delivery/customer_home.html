@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Customer Home - Meal Mate</title>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-brand">🍔 Meal Mate</div>
+        <div class="nav-links">
+            <span>Welcome, {{username}}!</span>
+            <a href="/" class="outline-btn">Logout</a>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+        <section class="restaurants-section">
+            <h1>Find Your Favorite Restaurant</h1>
+            <p class="section-subtitle">Browse restaurants and order delicious food</p>
+            
+            <!-- RESTAURANTS GRID -->
+            <div class="restaurant-grid">
+                {% for r in restaurantList %}
+                    <div class="restaurant-card">
+                        <div class="restaurant-image">
+                            <img src="{{ r.picture }}" alt="{{ r.name }}">
+                        </div>
+                        <div class="restaurant-info">
+                            <h3>{{ r.name }}</h3>
+                            <p class="cuisine-badge">{{ r.cuisine }}</p>
+                            <div class="restaurant-rating">
+                                <span class="rating-star">⭐</span>
+                                <span class="rating-value">{{ r.rating }}</span>
+                            </div>
+                            <a href="{% url 'view_menu' r.id username %}" class="primary-btn full-width">
+                                View Menu
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Meal Mate. All rights reserved.</p>
+    </footer>
+</body>
+</html>

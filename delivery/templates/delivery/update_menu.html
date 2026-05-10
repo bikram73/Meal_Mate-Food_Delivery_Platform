@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Update Menu - Meal Mate</title>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-brand">🍔 Meal Mate Admin</div>
+        <div class="nav-links">
+            <a href="open_show_restaurant" class="outline-btn">Back</a>
+            <a href="/" class="outline-btn">Logout</a>
+        </div>
+    </nav>
+
+    <!-- ADMIN CONTAINER -->
+    <div class="admin-container">
+        <aside class="sidebar">
+            <h3>Admin Menu</h3>
+            <ul class="sidebar-menu">
+                <li><a href="open_show_restaurant">Manage Restaurants</a></li>
+                <li><a href="open_add_restaurant">Add Restaurant</a></li>
+            </ul>
+        </aside>
+
+        <main class="admin-content">
+            <h2>Update Menu</h2>
+            
+            <!-- Current Menu -->
+            <div class="admin-section">
+                <h3>Current Menu Items</h3>
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Picture</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in itemList %}
+                            <tr>
+                                <td>{{ item.name }}</td>
+                                <td>
+                                    <img src="{{ item.picture }}" style="max-width: 60px; border-radius: 8px;">
+                                </td>
+                                <td>{{ item.description }}</td>
+                                <td>₹{{ item.price }}</td>
+                                <td>
+                                    {% if item.vegeterian %}
+                                        <span style="color: green;">🌱 Veg</span>
+                                    {% else %}
+                                        <span style="color: red;">🍗 Non-Veg</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Add Menu Item Form -->
+            <div class="admin-card">
+                <h3>Add New Menu Item</h3>
+                <form action="{% url 'update_menu' restaurant.id %}" method="post" class="admin-form">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="name">Item Name</label>
+                        <input type="text" id="name" name="name" required placeholder="e.g., Margherita Pizza">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" required placeholder="Brief description of the item" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price">Price (₹)</label>
+                        <input type="number" id="price" name="price" step="0.01" required placeholder="0.00">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="picture">Image URL</label>
+                        <input type="url" id="picture" name="picture" placeholder="https://example.com/image.jpg">
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="vegeterian" name="vegeterian">
+                        <label for="vegeterian">Vegetarian Item</label>
+                    </div>
+
+                    <button type="submit" class="primary-btn full-width">Add Item</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

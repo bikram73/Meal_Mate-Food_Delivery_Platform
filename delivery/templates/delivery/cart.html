@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Shopping Cart - Meal Mate</title>
+</head>
+<body>
+    Hi {{username}} here are you items
+    <!-- show current menu -->
+    <table border="1">
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <div class="navbar-brand">🍔 Meal Mate</div>
+            <div class="nav-links">
+                <span>Welcome, {{username}}!</span>
+                <a href="{% url 'customer_home' username %}" class="outline-btn">Back</a>
+                <a href="/" class="outline-btn">Logout</a>
+            </div>
+        </nav>
+
+        <!-- MAIN CONTENT -->
+        <main class="container">
+            <section class="cart-section">
+                <h1>Shopping Cart</h1>
+            
+                <!-- CART ITEMS -->
+                <div class="cart-layout">
+                    <div class="cart-items">
+                        {% for item in itemList %}
+                            <div class="cart-item">
+                                <div class="cart-item-image">
+                                    <img src="{{ item.picture }}" alt="{{ item.name }}">
+                                </div>
+                                <div class="cart-item-details">
+                                    <h3>{{ item.name }}</h3>
+                                    <p>{{ item.description }}</p>
+                                </div>
+                                <div class="cart-item-price">
+                                    <span>₹{{ item.price }}</span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- CHECKOUT BOX -->
+                    <div class="checkout-box">
+                        <h2>Order Summary</h2>
+                        <div class="summary-total">
+                            <span>Total</span>
+                            <span>₹{{ total_price }}</span>
+                        </div>
+                        <form action="{% url 'checkout' username %}" method="get">
+                            <button type="submit" class="primary-btn full-width">Proceed to Checkout</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>&copy; 2026 Meal Mate. All rights reserved.</p>
+        </footer>
+        
+        <form action="{% url 'checkout' username %}">
+            <input type="submit" value="CHECK OUT" />
+        </form>
+    </table>
+</body>
+</html>

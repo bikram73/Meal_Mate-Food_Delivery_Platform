@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Meal Mate - Food Delivery</title>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-brand">🍔 Meal Mate</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#restaurants">Restaurants</a>
+            <a href="open_signin" class="primary-btn">Sign In</a>
+            <a href="open_signup" class="primary-btn">Sign Up</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Order Your Favorite Food Online</h1>
+            <p class="hero-subtitle">Discover top-rated restaurants, explore delicious menus, and get meals delivered fast across your city.</p>
+            <form class="search-bar" action="#restaurants" method="get">
+                <input type="text" name="search" placeholder="Search restaurants, dishes, or cuisines">
+                <button type="submit">Search</button>
+            </form>
+            <div class="hero-highlights">
+                <span>30 min delivery</span>
+                <span>Fresh ingredients</span>
+                <span>Safe payments</span>
+            </div>
+            <div class="hero-buttons">
+                <a href="open_signup" class="primary-btn">Get Started</a>
+                <a href="open_signin" class="secondary-btn">Sign In</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://via.placeholder.com/400x400?text=Food+Delivery" alt="Food Delivery">
+        </div>
+    </section>
+
+    <!-- QUICK STATS -->
+    <section class="section container">
+        <div class="section-title">
+            <h2>Why people choose Meal Mate</h2>
+            <p>A fast, clean and reliable way to order food from nearby restaurants</p>
+        </div>
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Restaurants</h3>
+                <div class="dashboard-value">100+</div>
+                <p>Partner locations across the city.</p>
+            </div>
+            <div class="dashboard-card">
+                <h3>Orders Delivered</h3>
+                <div class="dashboard-value">24K+</div>
+                <p>Fast and reliable order fulfillment.</p>
+            </div>
+            <div class="dashboard-card">
+                <h3>Average Rating</h3>
+                <div class="dashboard-value">4.8</div>
+                <p>Consistently trusted by customers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section container" id="how-it-works">
+        <div class="section-title">
+            <h2>How it works</h2>
+            <p>Three simple steps to get your favorite meal delivered</p>
+        </div>
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>1. Choose a restaurant</h3>
+                <p>Browse restaurants by cuisine, rating, or delivery time.</p>
+            </div>
+            <div class="dashboard-card">
+                <h3>2. Build your cart</h3>
+                <p>Add dishes to your cart and review the total before checkout.</p>
+            </div>
+            <div class="dashboard-card">
+                <h3>3. Pay and enjoy</h3>
+                <p>Complete payment securely and track your order to the door.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features-section container">
+        <h2>Why Choose Meal Mate?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Fast Delivery</h3>
+                <p>Get your food delivered in 30 minutes or less</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🍽️</div>
+                <h3>Fresh Food</h3>
+                <p>Quality food from top-rated restaurants</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💳</div>
+                <h3>Easy Payment</h3>
+                <p>Multiple payment options for your convenience</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED RESTAURANTS -->
+    <section class="section container" id="restaurants">
+        <div class="section-title">
+            <h2>Featured restaurants</h2>
+            <p>Popular places loved by customers for quality, speed, and taste</p>
+        </div>
+        <div class="restaurant-grid">
+            <article class="restaurant-card">
+                <img class="restaurant-card-image" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="The Spice Route restaurant">
+                <div class="restaurant-card-content">
+                    <div class="restaurant-card-header">
+                        <h3>The Spice Route</h3>
+                        <span class="rating-badge">⭐ 4.8</span>
+                    </div>
+                    <p>North Indian, Mughlai</p>
+                    <p><small>Delivery in 25-30 mins</small></p>
+                </div>
+            </article>
+            <article class="restaurant-card">
+                <img class="restaurant-card-image" src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=900&q=80" alt="Urban Bites restaurant">
+                <div class="restaurant-card-content">
+                    <div class="restaurant-card-header">
+                        <h3>Urban Bites</h3>
+                        <span class="rating-badge">⭐ 4.7</span>
+                    </div>
+                    <p>Burgers, Fast Food</p>
+                    <p><small>Delivery in 20-25 mins</small></p>
+                </div>
+            </article>
+            <article class="restaurant-card">
+                <img class="restaurant-card-image" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80" alt="Green Bowl restaurant">
+                <div class="restaurant-card-content">
+                    <div class="restaurant-card-header">
+                        <h3>Green Bowl</h3>
+                        <span class="rating-badge">⭐ 4.9</span>
+                    </div>
+                    <p>Healthy, Salads, Bowls</p>
+                    <p><small>Delivery in 15-20 mins</small></p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- APP PROMO -->
+    <section class="section container">
+        <div class="section-title">
+            <h2>Built for a faster ordering experience</h2>
+            <p>Meal Mate keeps the flow simple from discovery to checkout</p>
+        </div>
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Smart search</h3>
+                <p>Find food by restaurant, dish, or cuisine with minimal effort.</p>
+            </div>
+            <div class="dashboard-card">
+                <h3>Mobile first</h3>
+                <p>Responsive layouts that feel natural on phones and tablets.</p>
+            </div>
+            <div class="dashboard-card">
+                <h3>Secure checkout</h3>
+                <p>Razorpay payment flow with clear order summaries and payment prompts.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Meal Mate. All rights reserved.</p>
+            <p>Fresh food, fast delivery, premium experience.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

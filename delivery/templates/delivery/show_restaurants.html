@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Manage Restaurants - Meal Mate</title>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-brand">🍔 Meal Mate Admin</div>
+        <div class="nav-links">
+            <a href="open_admin_home" class="outline-btn">Back</a>
+            <a href="/" class="outline-btn">Logout</a>
+        </div>
+    </nav>
+
+    <!-- ADMIN CONTAINER -->
+    <div class="admin-container">
+        <aside class="sidebar">
+            <h3>Admin Menu</h3>
+            <ul class="sidebar-menu">
+                <li><a href="open_show_restaurant">Manage Restaurants</a></li>
+                <li><a href="open_add_restaurant">Add Restaurant</a></li>
+            </ul>
+        </aside>
+
+        <main class="admin-content">
+            <h2>Manage Restaurants</h2>
+            <a href="open_add_restaurant" class="primary-btn">+ Add New Restaurant</a>
+            
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Restaurant</th>
+                        <th>Picture</th>
+                        <th>Cuisine</th>
+                        <th>Rating</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in restaurantList %}
+                        <tr>
+                            <td>{{ r.name }}</td>
+                            <td>
+                                <img src="{{ r.picture }}" style="max-width: 80px; border-radius: 8px;">
+                            </td>
+                            <td>{{ r.cuisine }}</td>
+                            <td>⭐ {{ r.rating }}</td>
+                            <td class="action-buttons">
+                                <a href="{% url 'open_update_restaurant' r.id %}" class="primary-btn btn-small">Edit</a>
+                                <a href="{% url 'delete_restaurant' r.id %}" class="danger-btn btn-small">Delete</a>
+                                <a href="{% url 'open_update_menu' r.id %}" class="secondary-btn btn-small">Menu</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+    </div>
+    
+</body>
+</html>

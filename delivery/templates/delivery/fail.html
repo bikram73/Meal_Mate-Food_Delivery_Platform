@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-brand">🍔 Meal Mate</div>
+        <div class="nav-links">
+            <a href="/" class="outline-btn">Home</a>
+        </div>
+    </nav>
+
+    <!-- ERROR MESSAGE -->
+    <div class="container">
+        <div class="error-container">
+            <div class="error-card">
+                <div class="error-icon">✕</div>
+                <h1>Login Failed</h1>
+                <p>Invalid username or password. Please try again.</p>
+                <a href="open_signin" class="primary-btn">Try Again</a>
+                <a href="open_signup" class="secondary-btn">Create Account</a>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Failed - Meal Mate</title>
+</head>
+<body>
+    <h3>login failed!</h3>
+</body>
+</html>

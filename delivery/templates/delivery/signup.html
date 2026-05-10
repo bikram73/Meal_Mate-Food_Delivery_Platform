@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Sign Up - Meal Mate</title>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-brand">🍔 Meal Mate</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="open_signin" class="primary-btn">Sign In</a>
+        </div>
+    </nav>
+
+    <!-- AUTH CONTAINER -->
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2>Create Your Account</h2>
+            <p class="auth-subtitle">Join Meal Mate and start ordering delicious food</p>
+            
+            <form action="{% url 'signup' %}" method="post" class="auth-form">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="account_type">Create Account As</label>
+                    <select id="account_type" name="account_type" required>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <small class="form-hint">Admin accounts require the code MEALMATE2026.</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required placeholder="Choose a username">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Create a strong password">
+                </div>
+
+                <div class="form-group">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="text" id="mobile" name="mobile" required placeholder="+1 (555) 000-0000">
+                </div>
+
+                <div class="form-group" id="address-group">
+                    <label for="address">Delivery Address</label>
+                    <textarea id="address" name="address" placeholder="Enter your full address" rows="4"></textarea>
+                </div>
+
+                <div class="form-group" id="admin-code-group" style="display: none;">
+                    <label for="admin_code">Admin Code</label>
+                    <input type="password" id="admin_code" name="admin_code" placeholder="Required only for admin accounts">
+                </div>
+
+                <button type="submit" class="primary-btn full-width">Create Account</button>
+            </form>
+
+            <p class="auth-footer">Already have an account? <a href="open_signin">Sign In</a></p>
+        </div>
+    </div>
+
+    <script>
+    (function () {
+        const accountType = document.getElementById('account_type');
+        const addressGroup = document.getElementById('address-group');
+        const addressField = document.getElementById('address');
+        const adminCodeGroup = document.getElementById('admin-code-group');
+        const adminCodeField = document.getElementById('admin_code');
+
+        function syncSignupFields() {
+            const isAdmin = accountType.value === 'admin';
+
+            addressGroup.style.display = isAdmin ? 'none' : 'block';
+            addressField.required = !isAdmin;
+            if (isAdmin) {
+                addressField.value = '';
+            }
+
+            adminCodeGroup.style.display = isAdmin ? 'block' : 'none';
+            adminCodeField.required = isAdmin;
+            if (!isAdmin) {
+                adminCodeField.value = '';
+            }
+        }
+
+        accountType.addEventListener('change', syncSignupFields);
+        syncSignupFields();
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Django artifacts
+db.sqlite3
+staticfiles/
+*.log
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# IDE/system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Project-specific
+.qodo/
