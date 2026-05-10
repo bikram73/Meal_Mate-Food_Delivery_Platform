@@ -33,12 +33,11 @@ ALLOWED_HOSTS = [
     ).split(',')
 ]
 
-# Auto-allow Vercel domains in production
-if not DEBUG:
-    ALLOWED_HOSTS.extend([
-        '.vercel.app',
-        '.meal-mate.app',  # Custom domain (if added)
-    ])
+# Always allow Vercel domains
+ALLOWED_HOSTS.extend([
+    '.vercel.app',
+    '.meal-mate.app',  # Custom domain (if added)
+])
 
 
 # Application definition
