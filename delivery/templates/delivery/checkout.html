@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Checkout - Meal Mate</title>
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
     <!-- NAVBAR -->
@@ -50,12 +49,28 @@
                     <!-- Payment Section -->
                     <div class="checkout-payment">
                         <div class="payment-card">
-                            <h2>Payment Method</h2>
-                            <p class="payment-description">Choose your preferred payment method</p>
-                            <button id="rzp-button" class="primary-btn full-width payment-btn">
-                                💳 Pay with Razorpay (₹{{ total_price }})
-                            </button>
-                            <p class="payment-secure">🔒 Secure payment powered by Razorpay</p>
+                            <h2>Verify & Complete Payment</h2>
+                            <p class="payment-description">Please verify your credentials to complete the order</p>
+                            
+                            <form method="POST">
+                                {% csrf_token %}
+                                
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                                </div>
+                                
+                                <button type="submit" class="primary-btn full-width payment-btn">
+                                    ✓ Confirm Payment (₹{{ total_price }})
+                                </button>
+                            </form>
+                            
+                            <p class="payment-secure">🔒 Secure verification required</p>
                         </div>
                     </div>
                 </div>
@@ -67,39 +82,6 @@
     <footer>
         <p>&copy; 2026 Meal Mate. All rights reserved.</p>
     </footer>
-
-
-    
-
-    <script>
-        var options = {
-            "key": "{{ rzp_test_lT6VV3Hhr4ayCQ }}",  // Razorpay API key
-            "amount": "{{ total_price|floatformat:2|add:'0.00'|floatformat:2 }}00", // Amount in paisa
-            "currency": "INR",
-            "name": "Meal Buddy",
-            "description": "Order Payment",
-            "order_id": "{{ order_id }}",  // Razorpay order ID
-            "handler": function (response) {
-                alert("Payment Successful!");
-                // Redirect to the orders page
-                window.location.href = "{% url 'orders' username %}";
-            },
-            "prefill": {
-                "name": "{{ username }}",
-                "email": "customer@example.com",
-                "contact": "9999999999"
-            },
-            "theme": {
-                "color": "#528FF0"
-            }
-        };
-        var rzp = new Razorpay(options);
-    
-        document.getElementById('rzp-button').onclick = function(e) {
-            rzp.open();
-            e.preventDefault();
-        }
-    </script>
     
 </body>
 </html>

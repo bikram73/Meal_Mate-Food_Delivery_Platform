@@ -33,14 +33,22 @@
                     <p>{{ customer.address }}</p>
                 </div>
 
+                {% if cart_items %}
+                    <h3>Items Ordered:</h3>
+                    <div class="items-summary">
+                        {% for item in cart_items %}
+                            <div class="item-row">
+                                <span>{{ item.name }}</span>
+                                <span>₹{{ item.price }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
                 <p class="delivery-message">Your order will be delivered to this location shortly. Thank you for choosing Meal Mate!</p>
 
                 <div class="order-actions">
-                    {% if cart_items %}
-                        <a href="{% url 'customer_menu' cart_items.0.restaurant.id username %}" class="primary-btn">Order Again</a>
-                    {% else %}
-                        <a href="{% url 'customer_home' username %}" class="primary-btn">Back to Restaurants</a>
-                    {% endif %}
+                    <a href="{% url 'customer_home' username %}" class="primary-btn">Back to Restaurants</a>
                 </div>
             </div>
         </div>
@@ -50,4 +58,5 @@
     <footer>
         <p>&copy; 2026 Meal Mate. All rights reserved.</p>
     </footer>
+</body>
 </html>

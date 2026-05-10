@@ -3,9 +3,6 @@ from django.http import HttpResponse
 
 from .models import Customer, Restaurant, Item, Cart
 
-import razorpay
-from django.conf import settings
-
 ADMIN_SIGNUP_CODE = 'MEALMATE2026'
 
 # Create your views here.
@@ -195,7 +192,33 @@ def show_cart(request, username):
 
 # Checkout View
 def checkout(request, username):
-    # Fetch customer and their cart
+    if request.method == 'POST':
+        # Verify payment credentials (email + password)
+        email = request.POST.get('email', '').strip()
+        password = request.POST.get('password', '').strip()
+        
+        # Fetch customer
+        customer = get_object_or_404(Customer, username=username)
+        
+        # Verify email and password
+        if customer.email != email or customer.password != password:
+            return render(request, 'delivery/fail.html')
+        
+        # Payment verified - fetch cart items and clear cart
+        cart = Cart.objects.filter(customer=customer).first()
+        cart_items = list(cart.items.all()) if cart else []
+        
+        # Clear the cart after fetching its details
+        if cart:
+            cart.items.clear()
+        
+        return render(request, 'delivery/orders.html', {
+            'username': username,
+            'customer': customer,
+            'cart_items': cart_items,
+        })
+    
+    # GET request - show checkout form
     customer = get_object_or_404(Customer, username=username)
     cart = Cart.objects.filter(customer=customer).first()
     cart_items = cart.items.all() if cart else []
@@ -206,25 +229,10 @@ def checkout(request, username):
             'error': 'Your cart is empty!',
         })
 
-    # Initialize Razorpay client
-    client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
-
-    # Create Razorpay order
-    order_data = {
-        'amount': int(total_price * 100),  # Amount in paisa
-        'currency': 'INR',
-        'payment_capture': '1',  # Automatically capture payment
-    }
-    order = client.order.create(data=order_data)
-
-    # Pass the order details to the frontend
     return render(request, 'delivery/checkout.html', {
         'username': username,
         'cart_items': cart_items,
         'total_price': total_price,
-        'razorpay_key_id': settings.RAZORPAY_KEY_ID,
-        'order_id': order['id'],  # Razorpay order ID
-        'amount': total_price,
     })
 
 

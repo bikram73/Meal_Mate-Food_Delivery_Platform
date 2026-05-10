@@ -146,8 +146,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Use WhiteNoise storage for compressed static files in production
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# RAZORPAY_KEY_ID = 'rzp_test_lTV3Hhr4ayCQ'
-# RAZORPAY_KEY_SECRET = 'eFILRtRtJyDqE4Qkz5a3K9'
 
 
 
@@ -172,9 +170,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
-
-RAZORPAY_KEY_ID = os.environ.get('RAZORPAY_KEY_ID', '')
-RAZORPAY_KEY_SECRET = os.environ.get('RAZORPAY_KEY_SECRET', '')
 
 
 
