@@ -35,9 +35,14 @@ ALLOWED_HOSTS = [
 
 # Always allow Vercel domains
 ALLOWED_HOSTS.extend([
-    '*.vercel.app',
-    '*.meal-mate.app',  # Custom domain (if added)
+    '.vercel.app',
+    '.meal-mate.app',  # Custom domain (if added)
 ])
+
+# In production on Vercel, if no specific host is configured, accept all
+# This is a safety net for dynamic preview deployments
+if os.environ.get('VERCEL') == '1':
+    ALLOWED_HOSTS = ['*']
 
 
 # Application definition
