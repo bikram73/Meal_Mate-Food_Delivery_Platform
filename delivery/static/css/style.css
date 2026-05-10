@@ -854,9 +854,7 @@ a {
 
 /* ========== ADMIN DASHBOARD ========== */
 .admin-container {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 0;
+    display: block;
     min-height: 100vh;
 }
 
@@ -905,10 +903,15 @@ a {
 .admin-content {
     margin-left: 250px;
     padding: 40px;
+    width: 100%;
+    max-width: calc(100% - 250px);
+    overflow-x: hidden;
 }
 
 .admin-page-header {
     margin-bottom: 24px;
+    width: 100%;
+    max-width: 900px;
 }
 
 .admin-page-header h1 {
@@ -922,11 +925,13 @@ a {
 }
 
 .admin-form-wrap {
+    width: 100%;
     max-width: 760px;
 }
 
 .admin-card-form {
     padding: 32px;
+    width: 100%;
 }
 
 .admin-content h1,
@@ -1504,7 +1509,7 @@ footer {
 
     /* Admin */
     .admin-container {
-        grid-template-columns: 1fr;
+        display: block;
     }
 
     .sidebar {
@@ -1522,6 +1527,7 @@ footer {
 
     .admin-content {
         margin-left: 0;
+        max-width: 100%;
         padding: 20px;
     }
 
