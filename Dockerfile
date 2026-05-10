@@ -17,6 +17,7 @@ COPY . /app/
 
 # Collect static files and run migrations during build (best-effort)
 RUN python manage.py collectstatic --noinput || true
+RUN mkdir -p /app/staticfiles || true
 RUN python manage.py migrate --noinput || true
 
 EXPOSE 8000
