@@ -26,10 +26,19 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'dev-insecure-secret-key-change
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = os.environ.get(
-    'DJANGO_ALLOWED_HOSTS',
-    '127.0.0.1,localhost,yourusername.pythonanywhere.com'
-).split(',')
+ALLOWED_HOSTS = [
+    host.strip() for host in os.environ.get(
+        'DJANGO_ALLOWED_HOSTS',
+        '127.0.0.1,localhost'
+    ).split(',')
+]
+
+# Auto-allow Vercel domains in production
+if not DEBUG:
+    ALLOWED_HOSTS.extend([
+        '.vercel.app',
+        '.meal-mate.app',  # Custom domain (if added)
+    ])
 
 
 # Application definition
