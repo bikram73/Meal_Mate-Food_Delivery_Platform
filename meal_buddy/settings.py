@@ -35,8 +35,8 @@ ALLOWED_HOSTS = [
 
 # Always allow Vercel domains
 ALLOWED_HOSTS.extend([
-    '.vercel.app',
-    '.meal-mate.app',  # Custom domain (if added)
+    '*.vercel.app',
+    '*.meal-mate.app',  # Custom domain (if added)
 ])
 
 
