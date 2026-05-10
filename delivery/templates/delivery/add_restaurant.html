@@ -11,7 +11,7 @@
     <nav class="navbar">
         <div class="navbar-brand">🍔 Meal Mate Admin</div>
         <div class="nav-links">
-            <a href="open_show_restaurant" class="outline-btn">Back</a>
+            <a href="{% url 'open_show_restaurant' %}" class="outline-btn">Back</a>
             <a href="/" class="outline-btn">Logout</a>
         </div>
     </nav>
@@ -20,41 +20,45 @@
         <aside class="sidebar">
             <h3>Admin Menu</h3>
             <ul class="sidebar-menu">
-                <li><a href="open_show_restaurant">Manage Restaurants</a></li>
-                <li><a href="open_add_restaurant" class="active">Add Restaurant</a></li>
+                <li><a href="{% url 'open_show_restaurant' %}">Manage Restaurants</a></li>
+                <li><a href="{% url 'open_add_restaurant' %}" class="active">Add Restaurant</a></li>
             </ul>
         </aside>
 
         <main class="admin-content">
-            <div class="admin-card">
-                <h2>Add New Restaurant</h2>
-                <p>Add a new restaurant profile with cuisine and rating details.</p>
+            <div class="admin-page-header">
+                <h1>Add New Restaurant</h1>
+                <p>Create a restaurant profile so customers can browse and order from it.</p>
+            </div>
 
-                <form action="{% url 'add_restaurant' %}" method="post" class="admin-form">
-                    {% csrf_token %}
+            <div class="admin-form-wrap">
+                <div class="admin-card admin-card-form">
+                    <form action="{% url 'add_restaurant' %}" method="post" class="admin-form">
+                        {% csrf_token %}
 
-                    <div class="form-group">
-                        <label for="name">Restaurant Name</label>
-                        <input type="text" id="name" name="name" required placeholder="Enter restaurant name">
-                    </div>
+                        <div class="form-group">
+                            <label for="name">Restaurant Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter restaurant name">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="picture">Picture URL</label>
-                        <input type="url" id="picture" name="picture" required placeholder="https://example.com/image.jpg">
-                    </div>
+                        <div class="form-group">
+                            <label for="picture">Picture URL</label>
+                            <input type="url" id="picture" name="picture" required placeholder="https://example.com/image.jpg">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="cuisine">Cuisine Type</label>
-                        <input type="text" id="cuisine" name="cuisine" required placeholder="e.g., Italian, Chinese">
-                    </div>
+                        <div class="form-group">
+                            <label for="cuisine">Cuisine Type</label>
+                            <input type="text" id="cuisine" name="cuisine" required placeholder="e.g., Italian, Chinese">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="rating">Rating (0-5)</label>
-                        <input type="number" id="rating" name="rating" min="0" max="5" step="0.5" placeholder="4.5">
-                    </div>
+                        <div class="form-group">
+                            <label for="rating">Rating (0-5)</label>
+                            <input type="number" id="rating" name="rating" min="0" max="5" step="0.5" placeholder="4.5">
+                        </div>
 
-                    <button type="submit" class="primary-btn full-width">Add Restaurant</button>
-                </form>
+                        <button type="submit" class="primary-btn full-width">Add Restaurant</button>
+                    </form>
+                </div>
             </div>
         </main>
     </div>
