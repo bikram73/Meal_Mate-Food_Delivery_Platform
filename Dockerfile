@@ -15,11 +15,11 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy project
 COPY . /app/
 
-# Collect static files and run migrations during build (best-effort)
-RUN python manage.py collectstatic --noinput || true
-RUN mkdir -p /app/staticfiles || true
+# Collect static files during build so runtime can serve them directly.
+RUN mkdir -p /app/staticfiles
+RUN python manage.py collectstatic --noinput
 RUN python manage.py migrate --noinput || true
 
 EXPOSE 8000
 
-CMD ["sh","-c","python manage.py migrate --noinput && python manage.py collectstatic --noinput && gunicorn meal_buddy.wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers 3"]
+CMD ["sh","-c","python manage.py migrate --noinput && gunicorn meal_buddy.wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers 3"]
